@@ -53,6 +53,11 @@ RUN set -x \
 
 WORKDIR /usr/local/apisix
 
+# install jdk
+RUN apk add openjdk11-jre
+# add plugin
+ADD apache-apisix-java-plugin-runner-0.2.0-bin.tar.gz ${WORKDIR}
+
 ENV PATH=$PATH:/usr/local/openresty/luajit/bin:/usr/local/openresty/nginx/sbin:/usr/local/openresty/bin
 
 EXPOSE 9080 9443
