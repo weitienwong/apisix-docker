@@ -22,7 +22,7 @@ FROM api7/apisix-base:1.19.9.1.1
 
 ARG APISIX_VERSION=2.11.0
 LABEL apisix_version="${APISIX_VERSION}"
-
+ADD apisix-${APISIX_VERSION}-0.rockspec .
 ARG ENABLE_PROXY
 RUN set -x \
     && (test "${ENABLE_PROXY}" != "true" || /bin/sed -i 's,http://dl-cdn.alpinelinux.org,https://mirrors.aliyun.com,g' /etc/apk/repositories) \
