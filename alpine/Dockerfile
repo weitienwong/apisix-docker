@@ -59,7 +59,8 @@ RUN apk add openjdk11-jre
 # add plugin
 ADD apache-apisix-java-plugin-runner-0.2.0-bin.tar.gz ${WORKDIR}
 
-# RUN chmod 777 apache-apisix-java-plugin-runner-0.2.0-bin.tar.gz
+RUN chown -R root.root /usr/local/apisix/apisix-runner-bin
+RUN chmod -R 777 /usr/local/apisix/apisix-runner-bin
 
 ENV PATH=$PATH:/usr/local/openresty/luajit/bin:/usr/local/openresty/nginx/sbin:/usr/local/openresty/bin
 
