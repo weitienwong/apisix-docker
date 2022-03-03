@@ -20,7 +20,7 @@
 
 
 # APISIX ARGS
-APISIX_VERSION ?= 2.11.0
+APISIX_VERSION ?= 2.12.1
 IMAGE_NAME = apache/apisix
 IMAGE_TAR_NAME = apache_apisix
 
@@ -76,6 +76,14 @@ build-on-alpine:
 	@$(call func_echo_success_status, "$@ -> [ Done ]")
 
 
+### build-on-alpine-dev : Build apache/apisix:xx-alpine-dev image
+.PHONY: build-on-alpine-dev
+build-on-alpine-dev:
+	@$(call func_echo_status, "$@ -> [ Start ]")
+	$(ENV_DOCKER) build -t $(ENV_APISIX_IMAGE_TAG_NAME)-alpine-dev -f ./alpine-dev/Dockerfile .
+	@$(call func_echo_success_status, "$@ -> [ Done ]")
+
+
 ### build-on-alpine-local : Build apache/apisix:xx-alpine-local image
 # Actually it is not build on certain version but on local code
 # Use this name (in the same patterns with others) for convenient CI
@@ -121,6 +129,14 @@ build-on-alpine-cn:
 build-all-in-one:
 	@$(call func_echo_status, "$@ -> [ Start ]")
 	$(ENV_DOCKER) build -t $(IMAGE_NAME):whole -f ./all-in-one/apisix/Dockerfile .
+	@$(call func_echo_success_status, "$@ -> [ Done ]")
+
+
+### build-dashboard-all-in-one : Build All in one Docker container for Apache APISIX-dashboard
+.PHONY: build-dashboard-all-in-one
+build-dashboard-all-in-one:
+	@$(call func_echo_status, "$@ -> [ Start ]")
+	$(ENV_DOCKER) build -t $(APISIX_DASHBOARD_IMAGE_NAME):whole -f ./all-in-one/apisix-dashboard/Dockerfile .
 	@$(call func_echo_success_status, "$@ -> [ Done ]")
 
 

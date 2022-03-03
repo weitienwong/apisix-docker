@@ -73,7 +73,7 @@ RUN set -x \
     && tar -xvf /tmp/apisix-dashboard.tar.gz -C /usr/local/apisix-dashboard --strip 1
 
 # Build APISIX Dashboard - 2. build manager-api from source code
-FROM golang:1.14 as api-builder
+FROM golang:1.17 as api-builder
 
 ARG APISIX_DASHBOARD_VERSION
 ARG ENABLE_PROXY
@@ -97,7 +97,7 @@ COPY --from=pre-build /usr/local/apisix-dashboard .
 
 WORKDIR /usr/local/apisix-dashboard/web
 
-RUN if [ "$ENABLE_PROXY" = "true" ] ; then yarn config set registry https://registry.npm.taobao.org/ ; fi \
+RUN if [ "$ENABLE_PROXY" = "true" ] ; then yarn config set registry https://registry.npmmirror.com/ ; fi \
     && yarn install \
     && yarn build
 
